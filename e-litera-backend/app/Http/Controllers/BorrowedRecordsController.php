@@ -2,27 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DownloadHistory;
+use App\Models\BorrowedRecords;
 use Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class DownloadHistoryController extends Controller
+class BorrowedRecordsController extends Controller
 {
     public function postBorrowRecord(Request $request):JsonResponse{
         $valData = $request->validate([
             'book_id' => 'required|exists:books,id',
-            'downloaded_at' => 'required|date_format:Y-m-d H:i:s'
+            'borrow_date' => 'required|date',
+            'return_date' => 'required|date|after:borrow_date',
+            'status' => 'required|string|in:borrowed,returned,overdue'
         ]);
 
         $valData['user_id'] = Auth::id();
 
-        $downloadHistory = DownloadHistory::create($valData);
+        $borrowedRecords = BorrowedRecords::create($valData);
 
          return response()->json([
                 'success' => true,
-                'messages' => 'Created Download Historu',
-                'data' => $downloadHistory
+                'messages' => 'Created Borrowed Records',
+                'data' => $borrowedRecords
         ],201);
     }
+
 }
