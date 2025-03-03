@@ -46,7 +46,7 @@ class ReviewController extends Controller
     }
 
 
-    public function updateMessage(Request $request, Review $review):JsonResponse{
+    public function updateReview(Request $request, Review $review):JsonResponse{
 
         // only sender can update their own review
         if ($review->sender_id !== Auth::id()) {
@@ -77,7 +77,7 @@ class ReviewController extends Controller
         ],200);
     }
 
-    public function deleteMessage(Review $review):JsonResponse{
+    public function deleteReview(Review $review):JsonResponse{
         if ($review->user_id !== Auth::id()) {
             return response()->json([
                 'success' => false,

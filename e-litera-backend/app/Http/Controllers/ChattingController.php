@@ -79,7 +79,7 @@ class ChattingController extends Controller
 
 
     public function deleteMessage(Chatting $message):JsonResponse{
-        if ($message->user_id !== Auth::id()) {
+        if ($message->sender_id !== Auth::id()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Unauthorized: You can only delete your own message.'

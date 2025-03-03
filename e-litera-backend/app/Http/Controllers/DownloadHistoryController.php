@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class DownloadHistoryController extends Controller
 {
-    public function postBorrowRecord(Request $request):JsonResponse{
+    public function postDownloadHistory(Request $request):JsonResponse{
         $valData = $request->validate([
             'book_id' => 'required|exists:books,id',
             'downloaded_at' => 'required|date_format:Y-m-d H:i:s'
@@ -21,7 +21,7 @@ class DownloadHistoryController extends Controller
 
          return response()->json([
                 'success' => true,
-                'messages' => 'Created Download Historu',
+                'messages' => 'Created Download History',
                 'data' => $downloadHistory
         ],201);
     }
