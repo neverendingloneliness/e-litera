@@ -1,31 +1,27 @@
-import { BrowserRouter, Route, Routes } from "react-router"
-import Landing from "./pages/landing/Landing"
-import Login from "./pages/auth/login/Login"
-import Register from "./pages/auth/register/Register"
-import { Provider } from "react-redux"
-import store from "./store/store"
-import { useState } from "react"
-import Loading from "./components/loading/loading"
+import { lazy, Suspense } from "react";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import Loading from "./components/loading/loading";
+import { createBrowserRouter, RouterProvider } from "react-router";
+
+const Landing = lazy(() => import("./pages/landing/Landing"));
+const Login = lazy(() => import("./pages/auth/login/Login"));
+const Register = lazy(() => import("./pages/auth/register/Register"));
+
+const router = createBrowserRouter([
+  { path: "/", element: <Landing /> },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+]);
 
 function App() {
-  const [loading, setIsLoading] = useState(true)
-  setTimeout (() => setIsLoading(false), 6000)  
-
-  return loading ? <Loading/> : (
-    <>
-    <Provider store={store} >
-       <BrowserRouter>
-          <Routes>
-              <Route path="/">
-                    <Route index element={<Landing />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/sign-up" element={<Register />} />
-              </Route>
-          </Routes>
-       </BrowserRouter>
-      </Provider> 
-    </>
-  )
+  return (
+    <Provider store={store}>
+      <Suspense fallback={<Loading />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </Provider>
+  );
 }
 
-export default App
+export default App;

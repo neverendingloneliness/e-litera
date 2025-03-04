@@ -3,6 +3,7 @@ import { RootState } from '../store'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL, 
+  credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState 
     const token = state.auth.token

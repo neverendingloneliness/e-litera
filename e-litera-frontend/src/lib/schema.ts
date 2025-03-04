@@ -12,3 +12,10 @@ export const registerSchema = z.object({
         message: "Password must be 8 characters.",
       }),
 })
+
+export const loginSchema = z.object({
+    email: z.string().min(1, { message: "This field has to be filled." }).email("This is not a valid email."),
+    password: z.string().max(8, {
+        message: "Password must be 8 characters.",
+      }),
+})

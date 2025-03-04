@@ -46,7 +46,7 @@ const Nav : React.FC<NavbarProps> = ({navlist, onNavClick}) => {
                 </li>
                 ))}                    
             </ul>
-            <Link to={'/sign-up'}>
+            <Link to={'/register'}>
               <button className='text-xl flex gap-2 items-center'>
                   <span className='bg-gradient-to-t from-violet-500 px-2 py-1 rounded-md to-purple-700 font-bold text-white'>Sign</span>
                   <span className='font-semibold'>Up</span>
