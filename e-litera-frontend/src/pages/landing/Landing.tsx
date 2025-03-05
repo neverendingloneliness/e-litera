@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import Nav from './componentsLanding/Nav'
 import { NAVLIST } from '../../constant/landing/LANDINGCONSTANT'
 import { useSectionRefs } from '../../hook/useSectionRefs'
+import Hero from './componentsLanding/Hero'
 
 const Landing = () => {
   
@@ -21,6 +22,7 @@ const Landing = () => {
   return (
     <div>
         <Nav onNavClick={scrollToSection} navlist={NAVLIST}/>
+        <Hero />
     </div>
   )
 }
