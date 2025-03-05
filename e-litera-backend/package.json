@@ -1,5 +1,6 @@
 {
-  "devDependencies": {
-
+  "dependencies": {
+    "framer-motion": "^12.4.10",
+    "motion": "^12.4.10"
   }
 }

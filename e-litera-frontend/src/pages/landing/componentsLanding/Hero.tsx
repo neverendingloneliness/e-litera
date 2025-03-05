@@ -1,14 +1,55 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link } from 'react-router'
 
 const Hero = () => {
-  return (
+
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseXSpring = useSpring(x)
+  const mouseYSpring = useSpring(y)
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["18.5deg", "-18.5deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-18.5deg", "18.5deg"])
+
+  const handleMouse = (e:any) => {
+    const rect = e.target.getBoundingClientRect()
+
+    const width = rect.width
+    const height = rect.height
+
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+
+    const xPct = mouseX / width - 0.5
+    const yPct = mouseY / height - 0.5
+
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+    return (
     <div className='flex justify-center flex-row-reverse items-center min-h-screen gap-16'>
       {/* img */}
-        <div className=''>
-            <img src="/assets/landingAssets/Hero.png" alt="img" width={500} className=''/>
-        </div>
+        <motion.div className='relative' onMouseMove={handleMouse} onMouseLeave={handleMouseLeave} style={{
+          rotateX,
+          rotateY,
+          transformStyle:"preserve-3d",
+          }}>
+            <div className='absolute inset-4 grid place-content-center rounded-xl bg-purple-200 shadow-lg' style={{
+                transform: "translateZ(0)",
+              }}/>
+                <div className='absolute inset-4 grid place-content-center rounded-full  bg-purple-100 shadow-lg' style={{
+                transform: "translateZ(40px)",
+              }}/>
+            <img src="/assets/landingAssets/Hero.png" alt="img" width={500} className='' style={{transform:"translateZ(75px)", transformStyle:"preserve-3d",}}/>
+        </motion.div>
 
       {/* Content of The Text */}
         <div className='flex flex-col gap-10'>
