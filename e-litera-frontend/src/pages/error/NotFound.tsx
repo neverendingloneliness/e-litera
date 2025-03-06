@@ -4,7 +4,7 @@ const NotFound = () => {
   return (
     <div>
         <div>
-            Not found
+            Not found   
         </div>
     </div>
   )

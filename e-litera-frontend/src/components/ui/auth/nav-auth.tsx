@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 const NavAuth = () => {
+    
+//  const [Header, setHeader] = useState(false)
+
+//   const scrollHeader = () => {
+//     if(window.scrollY >= 30){
+//       setHeader(true)
+//     }
+//     else {
+//       setHeader(false)
+//     }
+//   }
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//         scrollHeader()
+//     }
+//     window.addEventListener("scroll", handleScroll)
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll)
+//     }
+//   })
+      
   return (
-    <nav className='flex justify-between items-center px-32 p-5'>
+    <nav className='flex top-0 sticky justify-between items-center px-32 p-5'>
         <Link to={"/"} >
             <button className='text-xl flex items-center gap-1 '>
                 <span className='bg-gradient-to-t from-violet-500 px-2 rounded-md to-purple-700 font-bold text-white'>E</span><span className='text-purple-800 font-bold'>-</span>

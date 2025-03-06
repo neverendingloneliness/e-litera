@@ -5,6 +5,8 @@ import { useSectionRefs } from '../../hook/useSectionRefs'
 import Hero from './componentsLanding/Hero'
 import About from './componentsLanding/About'
 import Features from './componentsLanding/Features'
+import Upcoming from './componentsLanding/Upcoming'
+import Contact from './componentsLanding/Contact'
 
 const Landing = () => {
   
@@ -32,6 +34,13 @@ const Landing = () => {
         </div>
         <div ref={sectionRefs['features']} id='features'>
             <Features />
+        </div>
+
+        <div ref={sectionRefs['upcoming']} id='upcoming'>
+            <Upcoming />
+        </div>
+        <div ref={sectionRefs['contact']} id='contact'>
+            <Contact />
         </div>
     </div>
   )

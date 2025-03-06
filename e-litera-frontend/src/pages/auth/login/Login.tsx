@@ -12,11 +12,14 @@ import { MdOutlineEmail } from "react-icons/md";
 import { useLoginMutation,useUserQuery  } from '@/store/slice/auth.service'
 import { loginSchema } from '@/lib/schema'
 import NavAuth from '@/components/ui/auth/nav-auth'
+import { useDispatch } from 'react-redux'
+import { setCredentials } from '@/store/slice/authSlice'
 
 const Login = () => {
 
   const [login] = useLoginMutation()
-  const { data: user, refetch } = useUserQuery()
+
+  const route = useNavigate()
 
     const form = useForm<z.infer<typeof loginSchema>>({
       resolver: zodResolver(loginSchema),
@@ -28,14 +31,14 @@ const Login = () => {
 
      async function onSubmit(values: z.infer<typeof loginSchema>) {
         try {
-          await login(values).unwrap()
-          console.log("login sukses")
-          const response = await refetch()
-          console.log("User Data:", response.data)
-        } catch (error) {
-          console.error("Registration failed:", error)
-        }
+          await login(values).unwrap();
+          route("/home")
+         
       }
+      catch(error) {
+        console.log("Error Login : " + error)
+      }
+    }
   
   return (
     <div className='min-h-screen'>

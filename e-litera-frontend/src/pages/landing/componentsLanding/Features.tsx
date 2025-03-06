@@ -12,7 +12,7 @@ type FeaturesProps = {
 
 const HoverFeaturesCards = () => {
   return (
-    <div className="p-5 px-32 flex flex-col gap-10 ">
+    <div className="p-5 px-32 flex flex-col gap-16 items-center ">
       <p className="text-4xl font-semibold ">Features</p>
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
         {FEATURESLIST.map((features, index ) => (

@@ -8,18 +8,15 @@ export interface UserData {
   role: "visitor" | "librarian";
   created_at: string;
   updated_at: string;
-  token: string;
+  // token: string;
 }
 
 export interface LoginResponse {
   success: boolean;
-  message: string;
-  data: UserData;
+  user: UserData;
 }
 
-export interface UserResponse {
-  data: UserData;
-}
+export interface UserResponse extends UserData {}
 
 export interface LoginCredentials {
   email: string;
