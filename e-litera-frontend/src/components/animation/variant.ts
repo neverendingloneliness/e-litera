@@ -60,3 +60,18 @@ export const fandeInContactAnimationVariant = {
         }
     })
 }
+
+export const fadeInWidthCollectionAnimationVariant = {
+    initial: {
+        opacity:0,
+        x:-100
+   },
+    animate: (index: number) => ({
+        opacity:1,
+        x:0,
+        transition: {
+            delay:0.4 * index,
+            animation:0.5
+        }
+    })
+}

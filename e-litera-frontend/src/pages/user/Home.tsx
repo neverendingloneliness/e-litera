@@ -1,4 +1,4 @@
-import Sidebar from '@/components/layout/Sidebar'
+import NavUser from '@/components/layout/nav-user'
 import { useUserQuery } from '@/store/slice/auth.service'
 import React from 'react'
 
@@ -7,15 +7,7 @@ const Home = () => {
 
     return (
       <div>
-
-        <div className='hidden lg:block w-[18%] '>
-            <Sidebar
-             navigation1={'Home'}
-             navigation2={'Collections'} 
-             navigation3={'Chat'} />
-
-        </div>
-
+          <NavUser />
         <div>
 
         </div>

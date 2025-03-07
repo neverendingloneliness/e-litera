@@ -41,17 +41,14 @@ class BookResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('cover_image')
                     ->image(),
-                Forms\Components\TextInput::make('pdf_url')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\FileUpload::make('pdf_url')
+                    ->acceptedFileTypes(['application/pdf']),
                 Forms\Components\TextInput::make('year_published')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('publisher')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
             ]);
     }
 

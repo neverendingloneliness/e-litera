@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('isbn')->unique();
             $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
-            $table->string('pdf_url');
+            $table->string('pdf_url')->nullable();
             $table->integer('year_published');
             $table->string('publisher');
             $table->enum('status', ['available','borrowed'])->default('available');
