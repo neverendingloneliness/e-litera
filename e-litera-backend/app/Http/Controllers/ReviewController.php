@@ -31,7 +31,7 @@ class ReviewController extends Controller
         $valData = $request->validate([
             'book_id' => 'required|exists:books,id',
             'rating' => 'required|integer|min:1|max:5',
-            'review' => 'required|string'
+            'review' => 'nullable|string'
         ]);
 
         $valData['user_id'] = Auth::id();

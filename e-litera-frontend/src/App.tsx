@@ -5,6 +5,7 @@ import Loading from "./components/loading/loading";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import NotFound from "./pages/error/NotFound";
 import Profile from "./pages/user/Profile";
+import BookDetail from "./pages/user/BookDetail";
 
 const Landing = lazy(() => import("./pages/landing/Landing"));
 const Login = lazy(() => import("./pages/auth/login/Login"));
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
   { path: "/home", element: <Home /> },
   { path: "/profile", element: <Profile /> },
   { path: "/collections", element: <Collections /> },
+  { path: "/books/:id", element: <BookDetail /> },
 ]);
 
 function App() {
