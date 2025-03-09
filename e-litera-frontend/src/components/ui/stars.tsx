@@ -4,7 +4,7 @@ import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
 
 const Stars = ({ bookId } : { bookId:number }) => {
 
-  const {data : getRating} = useGetAllRatingQuery()
+  const {data : getRating} = useGetAllRatingQuery({})
   const [addRating] = usePostRatingMutation()
   const [rating, setRating] = useState(0)
 
@@ -15,7 +15,7 @@ const Stars = ({ bookId } : { bookId:number }) => {
   const averageRating = useMemo(() => {
     if (bookRatings.length === 0) return 0;
     const total = bookRatings.reduce((sum:any, rating:any) => sum + rating.rating, 0);
-    return total / bookRatings.length;
+  return total / bookRatings.length;
   }, [bookRatings])
 
   async function handleRating(values:number) {

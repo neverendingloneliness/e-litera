@@ -17,7 +17,6 @@ const Loading = () => {
         <div className="absolute inset-0 bg-purple-500 z-20  animate-glitch" />
         <div className="absolute inset-0 bg-purple-400 z-10 h-3/4  animate-glitch" />
       </div>
-
     </div>
   );
 };

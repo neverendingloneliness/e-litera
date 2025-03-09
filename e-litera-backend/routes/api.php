@@ -26,7 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/messages/{message}', [ChattingController::class, 'deleteMessage']);
 
     // Borrow Records
-    Route::post('/borrow', [BorrowedRecordsController::class, 'postBorrowRecord']);
+    Route::get('/borrowed-records', [BorrowedRecordsController::class, 'getAllBorrowRecords']);
+    Route::get('/borrowed-records/{borrowedRecords}', [BorrowedRecordsController::class, 'getDetailBorrowedRecords']);
+    Route::post('/borrow-records', [BorrowedRecordsController::class, 'postBorrowRecord']);
 
     // Download History
     Route::post('/download-history', [DownloadHistoryController::class, 'postDownloadHistory']);

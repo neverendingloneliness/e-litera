@@ -37,7 +37,7 @@ const Collections = () => {
                             <p className='text-sm'>Kategori :  {item.category_name}</p>
                             <p className='text-sm'>Tahun Terbit : {item.year_published}</p>
                             <Link to={`/books/${item.id}`}>
-                                <Button className='bg-white border-2 hover:text-white border-black text-black'>
+                                <Button className='w-full bg-white border-2 hover:text-white border-black text-black'>
                                     View
                                 </Button>
                             </Link>
