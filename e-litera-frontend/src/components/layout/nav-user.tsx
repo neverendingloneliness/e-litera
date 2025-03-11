@@ -21,7 +21,7 @@ const NavUser = () => {
     }
 
     return (
-        <nav className='justify-between flex items-center px-32 p-5 top-0 start-0 sticky bg-white'>
+        <nav className='justify-between flex items-center px-32 p-5 top-0 start-0 sticky bg-white z-50'>
             <Link to={"/"}>
                 <button className='text-xl flex items-center gap-1 '>
                     <span className='bg-gradient-to-t from-violet-500 px-2 rounded-md to-purple-700 font-bold text-white'>E</span><span className='text-purple-800 font-bold'>-</span>
@@ -39,9 +39,9 @@ const NavUser = () => {
                         Collections
                     </li>
                 </Link>
-                <Link to={'/Chattings'} >
+                <Link to={'/forum'} >
                     <li>
-                        Chatting
+                        Forum
                     </li>
                 </Link>
             </ul>

@@ -17,6 +17,7 @@ import { setCredentials } from '@/store/slice/authSlice'
 
 const Login = () => {
 
+  const dispatch = useDispatch()
   const [login] = useLoginMutation()
 
   const route = useNavigate()
@@ -31,9 +32,15 @@ const Login = () => {
 
      async function onSubmit(values: z.infer<typeof loginSchema>) {
         try {
-          await login(values).unwrap();
+          const response = await login(values).unwrap()
+          if (!response?.data) {
+            throw new Error( "Login failed: No user data returned");
+          }
+          dispatch(setCredentials({
+            token: response.data.token, 
+            user: response.data 
+          }))
           route("/home")
-         
       }
       catch(error) {
         console.log("Error Login : " + error)

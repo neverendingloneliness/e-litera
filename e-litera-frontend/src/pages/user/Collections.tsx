@@ -1,8 +1,9 @@
-import { fadeInReverseAnimationVariant, fadeInWidthAnimationVariant } from '@/components/animation/variant'
+import { fadeInAnimationVariant, fadeInReverseAnimationVariant, fadeInWidthAnimationVariant, fadeInWidthBorrowBookAnimationReverseVariant, fadeInWidthBorrowBookAnimationVariant } from '@/components/animation/variant'
 import NavUser from '@/components/layout/nav-user'
 import { Button } from '@/components/ui/button'
 import { Books } from '@/interface/Books'
 import { useGetAllBooksQuery } from '@/store/slice/books.service'
+import { GiBookshelf } from "react-icons/gi"
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import React from 'react'
 import { Link } from 'react-router'
@@ -12,14 +13,23 @@ const Collections = () => {
     const {data : books, error} = useGetAllBooksQuery({})
     if (error) return <p>Error fetching books!</p>
 
-
     return (
     <div>
         <NavUser />
         <div className='px-32 flex flex-col gap-16'>
-            <div className=''>
-                <h1 className='font-semibold text-2xl mt-5'>Collections</h1>
-                <p>Lorem ipsum dolor sit amet consectetur,</p>
+            <div className='flex flex-col items-start mt-5 gap-5'>
+                <div className='flex  gap-4 text-4xl '>
+                    <motion.p variants={fadeInWidthBorrowBookAnimationReverseVariant} initial="initial" whileInView={"animate"}  viewport={{ once: false, }}>
+                        <GiBookshelf className='-skew-x-12' />
+                    </motion.p>
+                    <motion.h1 variants={fadeInReverseAnimationVariant} initial="initial" whileInView={"animate"}  viewport={{ once: false, }} className='font-semibold  '>
+                        Collections
+                    </motion.h1>
+                    <motion.p variants={fadeInWidthBorrowBookAnimationVariant} initial="initial" whileInView={"animate"}  viewport={{ once: false, }}>
+                        <GiBookshelf className='skew-x-12' />
+                    </motion.p>
+                </div>
+                <motion.p variants={fadeInAnimationVariant} initial="initial" whileInView={"animate"}  viewport={{ once: false, }}>Lorem ipsum dolor sit amet consectetur</motion.p>
             </div>
 
             <div className=''>

@@ -12,7 +12,7 @@ export const HOVERCONSTANT = [
     {
         icon:<IoBookSharp />,
         text:"Borrowed Books",
-        route:""
+        route:"/borrowed-books"
     },
     // {
     //     icon:<MdOutlineLogout />,

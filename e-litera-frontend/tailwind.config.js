@@ -55,16 +55,6 @@ export default {
 		  }
 		},
 		keyframes: {
-		  glitch: {
-			'0%, 100%': {
-			  clipPath: 'polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%)',
-			},
-			'50%': {
-			  clipPath: 'polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%)',
-			}
-		  },
-		},
-		keyframes: {
 			zoom: {
 				"0%": { transform: "scale(0)", opacity: "0" },
     			"50%": { transform: "scale(0.40)" },  
@@ -78,12 +68,18 @@ export default {
 				"50%": { transform: "rotate(-15deg)" },
 				"70%": { transform: "rotate(20deg)" },
 				"100%": { transform: "rotate(0deg)" }
-			}
+			},
+			glitch: {
+				'0%, 100%': {
+				  clipPath: 'polygon(0% 45%, 16% 44%, 33% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%)',
+				},
+				'50%': {
+				  clipPath: 'polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%)',
+				}
+			  },
 		  },
 		animation: {
-		  glitch: "glitch 1.5s infinite ease-in-out",
-		},
-		animation: {
+			"glitch": "glitch 1.5s infinite ease-in-out",
 			"zoom": "zoom 0.5s  cubic-bezier(0.34, 1.56, 0.74, 1)",
 			"rotate" : "rotate 0.5s ease-out"
 		  },

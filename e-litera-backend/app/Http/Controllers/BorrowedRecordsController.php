@@ -12,16 +12,30 @@ class BorrowedRecordsController extends Controller
 
     public function getAllBorrowRecords()
     {
-        $borrowedRecords = BorrowedRecords::all();
+        $borrowedRecords = BorrowedRecords::with('book')->get();
+
+        $formattedBorrowedRecords = $borrowedRecords->map(function ($record) {
+            return [
+                'id' => $record->id,
+                'user_id' => $record->user_id,
+                'book_id' => $record->book_id,
+                'borrow_date' => $record->borrow_date,
+                'return_date' => $record->return_date,
+                'status' => $record->status,
+                'cover_image' => asset('storage/' . $record->book->cover_image),
+                'book_title' => $record->book->book_title ?? 'Unknown Book',
+            ];
+        });
         return response()->json([
             'success' => true,
             'messages' => 'Get All Borrowed Records',
-            'data' => $borrowedRecords
+            'data' => $formattedBorrowedRecords
         ], 200);
 
     }
 
-    public function getDetailBorrowedRecords(BorrowedRecords $borrowedRecords){
+    public function getDetailBorrowedRecords(BorrowedRecords $borrowedRecords)
+    {
         return response()->json([
             'success' => true,
             'messages' => 'Get Detail Borrowed Records',
@@ -46,6 +60,26 @@ class BorrowedRecordsController extends Controller
             'messages' => 'Created Borrowed Records',
             'data' => $borrowedRecords
         ], 201);
+    }
+
+    public function returnBook($id): JsonResponse
+    {
+        $borrowedRecord = BorrowedRecords::where('id', $id)->first();
+
+        if ($borrowedRecord->status === 'returned') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Book is already returned'
+            ], 400);
+        }
+
+        $borrowedRecord->update(['status' => 'returned']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Book returned successfully',
+            'data' => $borrowedRecord
+        ]);
     }
 
 }

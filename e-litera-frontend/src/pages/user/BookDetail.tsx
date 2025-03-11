@@ -18,7 +18,7 @@ const BookDetail = () => {
   if (error) return <BookNotFound />
   if (!book?.data) return <p>No book found!</p>;
 
-  const item = book.data; 
+  const item = book.data
 
   return (
     <div className="flex flex-col gap-10">
@@ -43,7 +43,6 @@ const BookDetail = () => {
         <a href={item.pdf_url} target='_blank'>Pdf</a>
         <Stars bookId={id ? parseInt(id, 10) : 0} />
         <AlertBorrow bookId={id ? parseInt(id,10) : 0} />
-        
       </motion.div>
     </div>
   )
