@@ -14,7 +14,7 @@ import { useUserQuery } from '@/store/slice/auth.service';
 
 const BorrowedBookPage = () => {
 
-  const { data: borrow, isLoading, isError } = useGetAllBorrowedBooksQuery({})
+  const { data: borrow, isLoading, isError, refetch } = useGetAllBorrowedBooksQuery({})
   const [returnBook] = useReturnBorrowedBookMutation()
   const { data: currentUser, isLoading: isUserLoading } = useUserQuery()
 
@@ -25,7 +25,8 @@ const BorrowedBookPage = () => {
   const handleReturn = async (borrowedId: number) => {
     try {
       await returnBook(borrowedId).unwrap()
-      toast.success(`Buku berhasil dikembalikan!`);
+      toast.success(`Buku berhasil dikembalikan!`)
+      refetch()
     } catch (error) {
       console.log(error)
       alert("Book failed to return!")

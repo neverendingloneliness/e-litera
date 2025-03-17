@@ -15,11 +15,12 @@ import NavAuth from '@/components/ui/auth/nav-auth'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '@/store/slice/authSlice'
 import { toast, Toaster } from 'sonner'
+import ReplyLoading from '@/components/loading/reply-loading'
 
 const Login = () => {
 
   const dispatch = useDispatch()
-  const [login] = useLoginMutation()
+  const [login, {isLoading, isError}] = useLoginMutation()
 
   const route = useNavigate()
 
@@ -53,6 +54,7 @@ const Login = () => {
   return (
     <div className='min-h-screen'>
       <NavAuth />
+      <Toaster position="top-right" richColors />
       <div className='flex flex-col justify-center items-center min-h-screen'>
               <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -82,9 +84,8 @@ const Login = () => {
                 />
 
                 <div className='flex items-center gap-16'>
-                  <Button type="submit" className='bg-purple-500 hover:bg-purple-700'>
-                    Submit
-                    <Toaster position="top-right" richColors />
+                  <Button type="submit" disabled={isLoading} className='bg-purple-500 hover:bg-purple-700'>
+                      {isLoading ? "Submitting..." : "Submit"}
                    </Button>
                   <Link to={'/register'}>
                       <span className='font-semibold'>Dont Have an Account?</span>

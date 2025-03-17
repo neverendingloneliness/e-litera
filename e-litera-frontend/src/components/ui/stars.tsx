@@ -5,7 +5,7 @@ import { toast, Toaster } from "sonner";
 
 const Stars = ({ bookId } : { bookId:number }) => {
 
-  const {data : getRating} = useGetAllRatingQuery({})
+  const {data : getRating, refetch} = useGetAllRatingQuery({})
   const [addRating] = usePostRatingMutation()
   const [rating, setRating] = useState(0)
 
@@ -27,6 +27,7 @@ const Stars = ({ bookId } : { bookId:number }) => {
         rating : values
       }).unwrap()
       toast.success(`Rating Berhasil!`);
+      refetch()
       console.log("Response:", response)
     } catch (error) {
       console.log("Error:", error)

@@ -14,6 +14,7 @@ import AnimatedIconModal from './animated-icon/animated-icon'
 import { usePostBorrowedBooksMutation } from '@/store/slice/borrow.service'
 import { Link } from 'react-router'
 import { Button } from '../ui/button'
+import { toast, Toaster } from 'sonner'
 
 
 const AlertBorrow  = ({ bookId } : { bookId:number } ) => {
@@ -27,7 +28,9 @@ const AlertBorrow  = ({ bookId } : { bookId:number } ) => {
         borrow_date: new Date().toISOString(),
         return_date: new Date().toISOString(),
       }).unwrap()
+      toast.success(`Buku berhasil dipinjam!`)
       console.log("Response:", response)
+      window.location.reload()
     } catch (error) {
       console.log("Error:", error)
     }
@@ -38,7 +41,7 @@ const AlertBorrow  = ({ bookId } : { bookId:number } ) => {
       <div className='flex justify-center flex-row-reverse items-center gap-10'>
           <AlertDialogTrigger>Borrow</AlertDialogTrigger>
           <Link to={'/collections'}>
-                <Button className='bg-white border-2 border-purple-400 hover:text-white hover:bg-purple-400 text-black hover:'>
+                <Button className='bg-white border-2 border-black hover:bg-black hover:text-white text-black'>
                       Return 
                 </Button>
           </Link>
@@ -54,7 +57,10 @@ const AlertBorrow  = ({ bookId } : { bookId:number } ) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleSubmit()}>Confirm Borrow</AlertDialogAction>
+          <AlertDialogAction onClick={() => handleSubmit()}>
+            Confirm Borrow
+            <Toaster position="top-right" richColors />
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

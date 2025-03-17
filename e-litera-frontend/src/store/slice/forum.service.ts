@@ -24,6 +24,12 @@ export const forumApi = apiSlice.injectEndpoints({
                 body: { title, content }
             })
         }),
+        deleteForum : builder.mutation({
+            query: (id) => ({
+                url: `/forum-posts/${id}`,
+                method: "DELETE",
+            })
+        })
     })
 })
 
@@ -31,4 +37,5 @@ export const {
     useGetAllForumQuery,
     useGetDetailForumQuery,
     usePostForumMutation,
+    useDeleteForumMutation
 } = forumApi
