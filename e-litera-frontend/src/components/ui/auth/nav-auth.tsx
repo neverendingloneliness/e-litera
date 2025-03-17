@@ -3,16 +3,6 @@ import { Link } from "react-router";
 
 const NavAuth = () => {
     
-//  const [Header, setHeader] = useState(false)
-
-//   const scrollHeader = () => {
-//     if(window.scrollY >= 30){
-//       setHeader(true)
-//     }
-//     else {
-//       setHeader(false)
-//     }
-//   }
 
 //   useEffect(() => {
 //     const handleScroll = () => {

@@ -1,6 +1,7 @@
 import { useGetAllRatingQuery, usePostRatingMutation } from "@/store/slice/review.service";
 import React, { useMemo, useState } from "react";
 import { IoIosStar, IoIosStarHalf, IoIosStarOutline } from "react-icons/io";
+import { toast, Toaster } from "sonner";
 
 const Stars = ({ bookId } : { bookId:number }) => {
 
@@ -25,6 +26,7 @@ const Stars = ({ bookId } : { bookId:number }) => {
         book_id : bookId,
         rating : values
       }).unwrap()
+      toast.success(`Rating Berhasil!`);
       console.log("Response:", response)
     } catch (error) {
       console.log("Error:", error)
@@ -50,6 +52,7 @@ const Stars = ({ bookId } : { bookId:number }) => {
               ) : (
                 <IoIosStarOutline className="text-gray-400 text-3xl" />
               )}
+            <Toaster position="top-right" richColors />
           </button>
         )
       })}

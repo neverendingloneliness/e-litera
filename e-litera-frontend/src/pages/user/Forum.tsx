@@ -1,7 +1,7 @@
 import NavUser from '@/components/layout/nav-user'
 import { useGetAllForumQuery } from '@/store/slice/forum.service'
 import React from 'react'
-import ForumPost from './forum/ForumPost'
+import ForumPost from './forum-post/ForumPost'
 import { Link } from 'react-router'
 import { Button } from '@/components/ui/button'
 import { ForumAll } from '@/interface/Forum'
@@ -12,13 +12,14 @@ import { RootState } from '@/store/store'
 import { useUserQuery } from '@/store/slice/auth.service'
 import { motion } from 'framer-motion'
 import { fadeInAnimationVariant, fadeInReverseAnimationVariant, fadeInWidthBorrowBookAnimationReverseVariant } from '@/components/animation/variant'
+import Loading from '@/components/loading/loading'
 
 const Forum = () => {
 
     const { data: forum, isLoading, isError } = useGetAllForumQuery({})
     const { data: currentUser, isLoading: isUserLoading } = useUserQuery()
 
-    if (isLoading) return <p>Loading....</p>
+    if (isLoading) return < Loading />
     if (isError) return <p>Error!</p>
     return (
         <div>

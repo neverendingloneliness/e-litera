@@ -8,13 +8,14 @@ import BookNotFound from '../error/book-detail/book-notFound';
 import Stars from '@/components/ui/stars';
 import AlertBorrow from '@/components/modal/borrow-book';
 import { Button } from '@/components/ui/button';
+import Loading from '@/components/loading/loading';
 
 const BookDetail = () => {
   const { id } = useParams()  ;
 
   const { data: book, error, isLoading } = useGetDetailBookQuery(id);
 
-  if (isLoading) return <p>Loading book details...</p>;
+  if (isLoading) return < Loading />
   if (error) return <BookNotFound />
   if (!book?.data) return <p>No book found!</p>;
 

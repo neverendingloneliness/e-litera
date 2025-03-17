@@ -15,8 +15,8 @@ class ForumReplyController extends Controller
             return [
                 'id' => $forumsReply->id,
                 'user_id' => $forumsReply->user_id,
-                'forum_post_id' => $forumsReply->forum_post_id,
-                'forum_title' => $forumsReply->forumPost->title_forum,
+                'post_id' => $forumsReply->post_id,
+                'title' => $forumsReply->forumPost->title ?? 'No Title',
                 'user_name' => $forumsReply->user->name,
                 'content' => $forumsReply->content,
             ];
@@ -32,7 +32,7 @@ class ForumReplyController extends Controller
         );
     }
 
-    public function getForumPost($id)
+    public function getForumReply($id)
     {
         $forumReply = ForumReply::with(['user', 'forumPost'])->find($id);
 
@@ -56,26 +56,24 @@ class ForumReplyController extends Controller
         ], 200);
     }
 
-
-    public function createForumPost(Request $request)
+    public function createForumReply(Request $request)
     {
         $validatedData = $request->validate([
-            'forum_post_id' => 'required|exists:forum_posts,id',
+            'post_id' => 'required|exists:forum_posts,id',
             'content' => 'required|string',
         ]);
 
         $validatedData['user_id'] = auth()->id();
-
-        $forumReply = ForumReply::create($validatedData);
+        $reply = ForumReply::create($validatedData);
 
         return response()->json([
             'success' => true,
             'messages' => 'Forum Reply Created Successfully',
-            'data' => $forumReply
+            'data' => $reply
         ], 201);
     }
 
-    public function updateForumPost(Request $request, $id)
+    public function updateForumReply(Request $request, $id)
     {
         $forumReply = ForumReply::find($id);
 
@@ -106,10 +104,9 @@ class ForumReplyController extends Controller
         ], 200);
     }
 
-
-    public function deleteForumPost($id)
+    public function deleteForumReply($id)
     {
-        $forumReply = ForumReply::find($id);
+        $forumReply = ForumReply::findOrFail($id);
 
         if (!$forumReply) {
             return response()->json([

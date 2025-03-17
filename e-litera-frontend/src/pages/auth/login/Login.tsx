@@ -14,6 +14,7 @@ import { loginSchema } from '@/lib/schema'
 import NavAuth from '@/components/ui/auth/nav-auth'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '@/store/slice/authSlice'
+import { toast, Toaster } from 'sonner'
 
 const Login = () => {
 
@@ -41,9 +42,11 @@ const Login = () => {
             user: response.data 
           }))
           route("/home")
+          toast.success(`Login Berhasil!`);
       }
       catch(error) {
         console.log("Error Login : " + error)
+        toast.error(`Login Gagal!`);
       }
     }
   
@@ -79,7 +82,10 @@ const Login = () => {
                 />
 
                 <div className='flex items-center gap-16'>
-                  <Button type="submit" className='bg-purple-500 hover:bg-purple-700'>Submit</Button>
+                  <Button type="submit" className='bg-purple-500 hover:bg-purple-700'>
+                    Submit
+                    <Toaster position="top-right" richColors />
+                   </Button>
                   <Link to={'/register'}>
                       <span className='font-semibold'>Dont Have an Account?</span>
                   </Link>

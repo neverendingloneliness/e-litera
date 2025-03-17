@@ -7,12 +7,14 @@ import { GiBookshelf } from "react-icons/gi"
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import React from 'react'
 import { Link } from 'react-router'
+import Loading from '@/components/loading/loading'
 
 const Collections = () => {
   
-    const {data : books, error} = useGetAllBooksQuery({})
+    const {data : books, error, isLoading} = useGetAllBooksQuery({})
     if (error) return <p>Error fetching books!</p>
-
+    if (isLoading) return < Loading />
+ 
     return (
     <div>
         <NavUser />

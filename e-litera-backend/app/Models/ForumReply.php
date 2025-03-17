@@ -20,7 +20,7 @@ class ForumReply extends Model
 
     public function forumPost(): BelongsTo
     {
-        return $this->belongsTo(ForumPost::class);
+        return $this->belongsTo(ForumPost::class, 'post_id');
     }
 
 

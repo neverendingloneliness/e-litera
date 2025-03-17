@@ -8,7 +8,7 @@ import Profile from "./pages/user/Profile";
 import BookDetail from "./pages/user/BookDetail";
 import BorrowedBookPage from "./pages/user/BorrowedBookPage";
 import Forum from "./pages/user/Forum";
-import ForumPost from "./pages/user/forum/ForumPost";
+import ForumPost from "./pages/user/forum-post/ForumPost";
 import ForumDetail from "./pages/user/ForumDetail";
 
 const Landing = lazy(() => import("./pages/landing/Landing"));

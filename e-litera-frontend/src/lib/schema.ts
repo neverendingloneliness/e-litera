@@ -24,3 +24,7 @@ export const forumSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters long").max(100, "Title cannot exceed 100 characters"),
   content: z.string().min(10, "Content must be at least 10 characters long").max(1000, "Content cannot exceed 1000 characters"),
 });
+
+export const replySchema = z.object({
+  content: z.string().min(5, 'Komentar minimal 5 karakter').max(500, 'Komentar maksimal 500 karakter'),
+});

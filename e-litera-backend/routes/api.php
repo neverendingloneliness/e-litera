@@ -21,12 +21,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/categories', [CategoryController::class, 'getAllCategory']);
     Route::get('/categories/{category}', [CategoryController::class, 'showCategory']);
 
-    // Chatting
-    Route::get('/messages', [ChattingController::class, 'getAllMessages']);
-    Route::get('/messages/{message}', [ChattingController::class, 'getDetailMessage']);
-    Route::post('/messages', [ChattingController::class, 'postMessage']);
-    Route::put('/messages/{message}', [ChattingController::class, 'updateMessage']);
-    Route::delete('/messages/{message}', [ChattingController::class, 'deleteMessage']);
 
     // Borrow Records
     Route::get('/borrowed-records', [BorrowedRecordsController::class, 'getAllBorrowRecords']);

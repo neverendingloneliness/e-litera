@@ -14,7 +14,7 @@ const Loading = () => {
             <div key={i} className="w-full h-2 bg-gray-200 rounded my-1"></div>
           ))}
         </div>
-        <div className="absolute inset-0 bg-purple-500 z-20  animate-glitch" />
+        <div className="absolute inset-0 bg-purple-500 z-20  animate-g" />
         <div className="absolute inset-0 bg-purple-400 z-10 h-3/4  animate-glitch" />
       </div>
     </div>
