@@ -10,11 +10,19 @@ use Illuminate\Http\Request;
 class BorrowedRecordsController extends Controller
 {
 
-    public function getAllBorrowRecords()
+    public function getAllBorrowRecords(Request $request): JsonResponse
     {
-        $borrowedRecords = BorrowedRecords::with('book')->get();
 
-        $formattedBorrowedRecords = $borrowedRecords->map(function ($record) {
+        $search = $request->get("search");
+
+        $borrowedRecords = BorrowedRecords::with('book')
+            ->when($search, function ($query, $search) {
+                return $query->whereHas('book', function ($bookQuery) use ($search) {
+                    $bookQuery->where('book_title', 'like', "%{$search}%");
+                });
+            })
+            ->paginate(8);
+        $formattedBorrowedRecords = $borrowedRecords->getCollection()->map(function ($record) {
             return [
                 'id' => $record->id,
                 'user_id' => $record->user_id,
@@ -29,7 +37,13 @@ class BorrowedRecordsController extends Controller
         return response()->json([
             'success' => true,
             'messages' => 'Get All Borrowed Records',
-            'data' => $formattedBorrowedRecords
+            'data' => $formattedBorrowedRecords,
+            'pagination' => [
+                'current_page' => $borrowedRecords->currentPage(),
+                'total_pages' => $borrowedRecords->lastPage(),
+                'total_items' => $borrowedRecords->total(),
+                'per_page' => $borrowedRecords->perPage(),
+            ]
         ], 200);
 
     }

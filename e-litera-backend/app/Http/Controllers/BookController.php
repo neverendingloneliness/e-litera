@@ -8,10 +8,19 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function getAllBooks():JsonResponse{
-         $books = Book::with('category')->get();
+    public function getAllBooks(Request $request): JsonResponse
+    {
 
-         $booksFormatted = $books->map(function ($book) {
+        $search = $request->get("search");
+
+        $books = Book::with('category')
+            ->when($search, function ($query, $search) {
+                return $query->where('book_title', 'like', "%{$search}%")
+                    ->orWhere('author', 'like', "%{$search}%");
+            })
+            ->paginate(8);
+
+        $booksFormatted = $books->getCollection()->map(function ($book) {
             return [
                 'id' => $book->id,
                 'book_title' => $book->book_title,
@@ -27,16 +36,25 @@ class BookController extends Controller
             ];
         });
 
-         return response()->json(
+        return response()->json(
             [
                 'success' => true,
                 'messages' => 'Get All Books',
-                'data' => $booksFormatted
-             ], 200);
+                'data' => $booksFormatted,
+                'pagination' => [
+                    'current_page' => $books->currentPage(),
+                    'total_pages' => $books->lastPage(),
+                    'total_items' => $books->total(),
+                    'per_page' => $books->perPage(),
+                ]
+            ],
+            200
+        );
 
     }
 
-    public function showBooks(Book $book):JsonResponse{
+    public function showBooks(Book $book): JsonResponse
+    {
 
         $formattedBook = [
             'id' => $book->id,
@@ -53,11 +71,13 @@ class BookController extends Controller
         ];
 
         return response()->json(
-           [
-               'success' => true,
-               'messages' => 'Get Detail Books',
-               'data' => $formattedBook
-            ], 200);
+            [
+                'success' => true,
+                'messages' => 'Get Detail Books',
+                'data' => $formattedBook
+            ],
+            200
+        );
 
-   }
+    }
 }

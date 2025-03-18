@@ -5,8 +5,8 @@ import { BorrowedBook, PostBorrowedBook } from "@/interface/BorrowedBook";
 export const borrowApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getAllBorrowedBooks: builder.query({
-            query: () => ({
-                url: "/borrowed-records",
+            query: ({page = 1, search = ""}) => ({
+                url: `/borrowed-records?page=${page}&search=${search}`,
                 method: "GET"
             })
         }),

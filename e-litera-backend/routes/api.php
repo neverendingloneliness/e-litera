@@ -21,7 +21,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/categories', [CategoryController::class, 'getAllCategory']);
     Route::get('/categories/{category}', [CategoryController::class, 'showCategory']);
 
-
     // Borrow Records
     Route::get('/borrowed-records', [BorrowedRecordsController::class, 'getAllBorrowRecords']);
     Route::get('/borrowed-records/{borrowedRecords}', [BorrowedRecordsController::class, 'getDetailBorrowedRecords']);

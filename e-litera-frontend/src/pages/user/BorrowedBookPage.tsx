@@ -11,13 +11,29 @@ import { FaBook } from 'react-icons/fa';
 import { Toaster, toast } from "sonner";
 import Loading from '@/components/loading/loading';
 import { useUserQuery } from '@/store/slice/auth.service';
+import { BsSearch } from 'react-icons/bs';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 const BorrowedBookPage = () => {
 
-  const { data: borrow, isLoading, isError, refetch } = useGetAllBorrowedBooksQuery({})
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState("")
+
+
+  const { data: borrow, isLoading, isError, refetch } = useGetAllBorrowedBooksQuery({ page, search })
   const [returnBook] = useReturnBorrowedBookMutation()
   const { data: currentUser, isLoading: isUserLoading } = useUserQuery()
 
+  const totalPages = borrow?.pagination?.total_pages || 0
+  const totalItems = borrow?.pagination?.total_items || 0
 
   if (isLoading) return <Loading />
   if (isError) return <p>Error Fetching Borrowed Books!</p>
@@ -32,6 +48,8 @@ const BorrowedBookPage = () => {
       alert("Book failed to return!")
     }
   }
+
+
 
   return (
     <div>
@@ -52,6 +70,16 @@ const BorrowedBookPage = () => {
           <motion.p variants={fadeInAnimationVariant} initial="initial" whileInView={"animate"} viewport={{ once: false, }}>
             Lorem ipsum dolor sit amet consectetur
           </motion.p>
+          <div className='flex w-full items-center gap-2 '>
+            <BsSearch />
+            <input
+              type="text"
+              placeholder="Search books..."
+              className="border p-2 w-1/3"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </div>
         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {borrow?.data?.filter((item: BorrowedBook) => item.user_id === currentUser?.id).length === 0 ? (
@@ -101,6 +129,38 @@ const BorrowedBookPage = () => {
             ))
           )}
         </div>
+        {totalPages > 1  && (
+          <div className="flex justify-between mt-10">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious className={`hover:cursor-pointer ${page === 1 ? "pointer-events-none opacity-50" : ""
+                    }`}
+                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))} />
+                </PaginationItem>
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNum) => (
+                  <PaginationItem key={pageNum}>
+                    <PaginationLink
+                      href="#"
+                      className={`${pageNum === page ? 'bg-purple-400 text-white' : 'bg-white text-black' }`}
+                      onClick={() => setPage(pageNum)}
+                      isActive={pageNum === page}
+                    >
+                      {pageNum}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext className={`hover:cursor-pointer ${page === totalPages ? "pointer-events-none opacity-50" : ""
+                    }`} onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))} />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )}
       </div>
     </div>
   )
