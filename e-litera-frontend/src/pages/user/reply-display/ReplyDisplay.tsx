@@ -12,7 +12,7 @@ import { toast, Toaster } from 'sonner'
 
 const ReplyDisplay = ({ post_id }: { post_id: number }) => {
 
-    const { data: reply, isLoading } = useGetAllForumRepliesQuery({})
+    const { data: reply, isLoading, refetch } = useGetAllForumRepliesQuery({})
     const [deleteReply] = useDeleteForumRepliesMutation()
     const { data: currentUser, isLoading: isUserLoading } = useUserQuery()
     
@@ -20,10 +20,19 @@ const ReplyDisplay = ({ post_id }: { post_id: number }) => {
         try {
             await deleteReply(id).unwrap()
             toast.success(`Komentar dihapus!`)
+            refetch()
         } catch (error) {
             console.error("Failed to delete reply:", error)
         }
     }
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            refetch()
+        }, 1000)
+
+        return () => clearInterval(intervalId)
+    }, [refetch])
 
     if (isLoading) return <ReplyLoading />
 

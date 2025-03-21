@@ -51,17 +51,17 @@ const NavUser = () => {
             </Link>
             <ul className='flex justify-center items-center gap-10'>
                 <Link to={'/home'}>
-                    <li>
+                    <li className='hover:scale-110 duration-500'>
                         Dashboard
                     </li>
                 </Link>
                 <Link to={'/collections'} >
-                    <li>
+                    <li className='hover:scale-110 duration-500'>
                         Collections
                     </li>
                 </Link>
                 <Link to={'/forum'} >
-                    <li>
+                    <li className='hover:scale-110 duration-500'>
                         Forum
                     </li>
                 </Link>

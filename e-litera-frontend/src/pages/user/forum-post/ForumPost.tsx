@@ -9,11 +9,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { title } from 'process'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router'
 import { z } from 'zod'
 
 
 const ForumPost = () => {
 
+  const route = useNavigate()
   const [postForum] = usePostForumMutation()
 
   const form = useForm<z.infer<typeof forumSchema>>({
@@ -30,6 +32,7 @@ const ForumPost = () => {
         title:values.title,
         content:values.content,
     }).unwrap()
+    route('/forum');
     }
     catch (error) {
       console.log("Error Login : " + error)
