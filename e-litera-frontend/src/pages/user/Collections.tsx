@@ -10,7 +10,7 @@ import { Link } from 'react-router'
 import { PiBooksFill } from "react-icons/pi"
 import { PiBooksLight } from "react-icons/pi"
 import Loading from '@/components/loading/loading'
-import { BsSearch } from "react-icons/bs"
+import { BsPinAngleFill, BsSearch } from "react-icons/bs"
 import {
     Pagination,
     PaginationContent,
@@ -20,6 +20,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
+import Stars from '@/components/ui/stars'
 
 const Collections = () => {
 
@@ -65,20 +66,18 @@ const Collections = () => {
                 </div>
 
                 <div className=''>
-                    <div className='grid grid-cols-4 gap-10'>
+                    <div className='grid grid-cols-5 gap-16'>
                         {books?.data?.map((item: Books, i: number) => (
-                            <motion.div className={`flex flex-col gap-5 shadow-lg  p-5 ${i % 2 === 1 ? 'bg-white' : 'bg-purple-50'} `} variants={fadeInWidthAnimationVariant} initial="initial" whileInView={"animate"} custom={i} viewport={{ once: false, }} >
-                                <p className='text-xl font-bold text-gray-800'>#{item.id}</p>
-                                <p className='text-2xl font-bold text-gray-800'>{item.book_title}</p>
-                                <div className='relative z-20 mt-5' >
-                                    <img src={item.cover_image} alt={item.cover_image} width={200} className='border-r-2 border-y-2 border-black ' />
-                                    <div className={`absolute inset-y-[5%] w-[75%]   grid place-content-center  -z-20  bg-purple-300 shadow-lg border-r-2 border-y-2 border-black ${i % 2 !== 1 ? 'bg-purple-100' : 'bg-violet-100'}`} />
-                                </div>
-                                <p className='text-xl font-semibold mt-10'>{item.author}</p>
-                                <p className='text-xs italic'>{item.description}</p>
-                                <p className='text-sm'>Publisher : <span className='font-semibold'>{item.publisher}</span> </p>
-                                <p className='text-sm'>Kategori :  <span className='font-semibold'>{item.category_name}</span></p>
-                                <p className='text-sm'>Tahun Terbit : <span className='font-semibold'>{item.year_published}</span></p>
+                            <motion.div className={`relative flex flex-col gap-5 shadow-lg p-5 ${i % 2 === 1 ? 'bg-white' : 'bg-purple-50'}  `}
+                                whileHover={{  x: -15, rotateZ: 3, scale: 1.1, transition: { type: "spring", stiffness: 200 } }}
+                                variants={fadeInWidthAnimationVariant} initial="initial"
+                                whileInView={"animate"} 
+                                custom={i} 
+                                viewport={{ once: false, }} >
+                                <p className='absolute top-[-20px] left-[50%] transform -translate-x-1/2 text-3xl '><BsPinAngleFill /></p>
+
+                                    <img src={item.cover_image} alt={item.cover_image} width={400} className='border-2 border-black ' />
+                                <p className='text-xl font-semibold text-gray-800'>{item.book_title}</p>
                                 <Link to={`/books/${item.id}`}>
                                     <Button className='w-full bg-white border-2 hover:text-white border-black text-black'>
                                         View

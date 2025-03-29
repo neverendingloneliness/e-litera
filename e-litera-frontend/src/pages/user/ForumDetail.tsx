@@ -13,7 +13,7 @@ const ForumDetail = () => {
   const { id } = useParams()
   const { data : forum, isLoading , isError} = useGetDetailForumQuery(id)
 
-  if (isLoading) return < Loading />;
+  if (isLoading) return < Loading />
   if ( isError ) return  <p>Error</p>
 
   const item = forum.data

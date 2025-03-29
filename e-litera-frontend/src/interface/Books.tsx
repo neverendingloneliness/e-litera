@@ -11,5 +11,4 @@ export interface Books {
     publisher:string,
     status: "available" | "borrowed" ,
     category_name:string,
-
 }

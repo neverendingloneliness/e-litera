@@ -29,7 +29,7 @@ const ReplyDisplay = ({ post_id }: { post_id: number }) => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             refetch()
-        }, 1000)
+        }, 100)
 
         return () => clearInterval(intervalId)
     }, [refetch])
